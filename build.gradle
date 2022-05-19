@@ -1,0 +1,66 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+}
+
+group = 'ru.levelp.services'
+version = '1.0'
+description = 'person-profile'
+java.sourceCompatibility = JavaVersion.VERSION_11
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+dependencies {
+    ext {
+        beanutilsVersion = '1.9.4'
+        commonsIoVersion = '2.11.0'
+        jacksonVersion = '2.13.3'
+        jacksonDatabindNullableVersion = '0.2.2'
+        javaxValidationVersion = '2.0.1.Final'
+        lombokVersion = '1.18.24'
+        springfoxVersion = '3.0.0'
+        swaggerAnnotationsVersion = '2.2.0'
+    }
+
+    // spring
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-aop"
+    implementation "org.springframework.boot:spring-boot-starter-test"
+
+    // commons-beanutils
+    implementation "commons-beanutils:commons-beanutils:${beanutilsVersion}"
+
+    // swagger
+    implementation "io.springfox:springfox-swagger2:${springfoxVersion}"
+    implementation "io.springfox:springfox-swagger-ui:${springfoxVersion}"
+    implementation "javax.validation:validation-api:${javaxValidationVersion}"
+    implementation "io.swagger.core.v3:swagger-annotations:${swaggerAnnotationsVersion}"
+    implementation ("org.openapitools:jackson-databind-nullable:${jacksonDatabindNullableVersion}") {
+        exclude group: "com.fasterxml.jackson.core", module: "jackson-databind"
+    }
+
+    // apache commons io
+    implementation "commons-io:commons-io:${commonsIoVersion}"
+
+    // jackson xml
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
+
+    // lombok
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

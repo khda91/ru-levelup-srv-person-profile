@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /srv-person-profile
+
+spring:
+  application:
+    name: ru-levelp-srv-person-profile
+
+springfox:
+  documentation:
+    auto-startup: false
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: INFO
