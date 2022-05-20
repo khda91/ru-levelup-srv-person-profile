@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: levelp-person-messenger-insert-test-data
+      author: d.khodakovsky
+      runOnChange: true
+      changes:
+        - insert:
+            tableName: person_messenger
+            columns:
+              - column:
+                  name: id
+                  value: "5e3864b7-459d-452c-a8af-06517c231c47"
+              - column:
+                  name: person_id
+                  value: "ec9655d2-e35d-4f45-be81-7ed4abc7cdc9"
+              - column:
+                  name: messenger_id
+                  value: "TELEGRAM"
+              - column:
+                  name: nickname
+                  value: "@ivan_ivanov"
+        - insert:
+            tableName: person_messenger
+            columns:
+              - column:
+                  name: id
+                  value: "5767e058-f10e-4283-93b1-191ecc5318ee"
+              - column:
+                  name: person_id
+                  value: "ec9655d2-e35d-4f45-be81-7ed4abc7cdc9"
+              - column:
+                  name: messenger_id
+                  value: "WHATS UP"
+              - column:
+                  name: nickname
+                  value: "@iivanov"

@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: levelp-social-network-create-table
+      author: d.khodakovsky
+      changes:
+        - createTable:
+            tableName: social_network
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+
+  - changeSet:
+      id: levelp-social-network-insert
+      author: d.khodakovsky
+      changes:
+        - insert:
+            tableName: social_network
+            columns:
+              - column:
+                  name: id
+                  value: "VK"
+        - insert:
+            tableName: social_network
+            columns:
+              - column:
+                  name: id
+                  value: "FACEBOOK"
+        - insert:
+            tableName: social_network
+            columns:
+              - column:
+                  name: id
+                  value: "LINKED IN"
+
+  - changeSet:
+      id: levelp-person-social-network-create-table
+      author: d.khodakovsky
+      changes:
+        - createTable:
+            tableName: person_social_network
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: person_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_person_social_network_person_id
+                    references: person(id)
+                    deleteCascade: true
+              - column:
+                  name: social_network_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_person_social_network_social_network_id
+                    references: social_network(id)
+              - column:
+                  name: link
+                  type: varchar(255)
+
+  - changeSet:
+      id: levelp-person-social-network-person-id-index
+      author: d.khodakovsky
+      changes:
+        - createIndex:
+            tableName: person_social_network
+            columns:
+              - column:
+                  name: person_id
+            indexName: idx_person_social_network_person_id

@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: levelp-messenger-create-table
+      author: d.khodakovsky
+      changes:
+        - createTable:
+            tableName: messenger
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+
+  - changeSet:
+      id: levelp-messenger-insert
+      author: d.khodakovsky
+      changes:
+        - insert:
+            tableName: messenger
+            columns:
+              - column:
+                  name: id
+                  value: "WHATS UP"
+        - insert:
+            tableName: messenger
+            columns:
+              - column:
+                  name: id
+                  value: "VIBER"
+        - insert:
+            tableName: messenger
+            columns:
+              - column:
+                  name: id
+                  value: "TELEGRAM"
+
+  - changeSet:
+      id: levelp-person-messenger-create-table
+      author: d.khodakovsky
+      changes:
+        - createTable:
+            tableName: person_messenger
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: person_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_person_messenger_person_id
+                    references: person(id)
+                    deleteCascade: true
+              - column:
+                  name: messenger_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_person_messenger_messenger_id
+                    references: messenger(id)
+              - column:
+                  name: nickname
+                  type: varchar(255)
+
+  - changeSet:
+      id: levelp-person-messenger-person-id-index
+      author: d.khodakovsky
+      changes:
+        - createIndex:
+            tableName: person_messenger
+            columns:
+              - column:
+                  name: person_id
+            indexName: idx_person_messenger_person_id

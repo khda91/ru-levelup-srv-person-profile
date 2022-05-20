@@ -130,3 +130,15 @@ configurations {
     testAnnotationProcessor.extendsFrom annotationProcessor
     testCompileOnly.extendsFrom compileOnly
 }
+
+liquibase {
+    activities {
+        dbupdate {
+            changeLogFile 'src/main/resources/changelog/changelog-master.yaml'
+            url "jdbc:mysql://localhost:5432/${project.hasProperty("database_name") ? project.ext.database_name : ''}?"
+            username project.hasProperty("database_user") ? project.ext.database_user : ''
+            password project.hasProperty("database_password") ? project.ext.database_password : ''
+            contexts project.hasProperty("liquibase_contexts") ? project.ext.liquibase_contexts : 'prod'
+        }
+    }
+}

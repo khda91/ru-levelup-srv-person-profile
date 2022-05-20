@@ -15,5 +15,20 @@ services:
     volumes:
       - postgres_data_person_profile:/var/lib/postgres
 
+  person-profile-liquibase:
+    image: liquibase/liquibase:4.10
+    container_name: person-profile-liquibase
+    volumes:
+      - ../src/main/resources/changelog/.:/liquibase/changelog
+    command:
+      --changeLogFile=changelog-master.yaml
+      --driver=org.postgresql.Driver
+      --url=jdbc:postgresql://person-profile-postgres:5432/person_profile
+      --username=person_profile
+      --password=password
+      update
+    depends_on:
+      - person-profile-postgres
+
 volumes:
   postgres_data_person_profile:

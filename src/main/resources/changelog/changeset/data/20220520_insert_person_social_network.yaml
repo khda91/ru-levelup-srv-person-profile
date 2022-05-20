@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: levelp-person-social-network-insert-test-data
+      author: d.khodakovsky
+      runOnChange: true
+      changes:
+        - insert:
+            tableName: person_social_network
+            columns:
+              - column:
+                  name: id
+                  value: "70f910c1-2284-4c36-b5ad-e9fb19c14e79"
+              - column:
+                  name: person_id
+                  value: "ec9655d2-e35d-4f45-be81-7ed4abc7cdc9"
+              - column:
+                  name: social_network_id
+                  value: "VK"
+              - column:
+                  name: link
+                  value: "https://vk.com/id123456"
