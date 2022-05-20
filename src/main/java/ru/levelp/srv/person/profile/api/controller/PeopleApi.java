@@ -10,33 +10,24 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.NativeWebRequest;
-import ru.levelp.srv.person.profile.api.ApiUtil;
-import ru.levelp.srv.person.profile.model.PersonListResponse;
-import ru.levelp.srv.person.profile.model.PersonRole;
-import ru.levelp.srv.person.profile.model.ProblemResponse;
+import ru.levelp.srv.person.profile.api.data.PersonListResponse;
+import ru.levelp.srv.person.profile.api.data.PersonRole;
+import ru.levelp.srv.person.profile.api.data.ProblemResponse;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.List;
-import java.util.Optional;
 
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-19T18:45:57.374415+03:00[Europe/Moscow]")
 @Validated
 @Api(value = "people", description = "the people API")
 public interface PeopleApi {
-
-    default Optional<NativeWebRequest> getRequest() {
-        return Optional.empty();
-    }
 
     /**
      * GET /people
@@ -63,18 +54,5 @@ public interface PeopleApi {
             value = "/people",
             produces = {"application/json", "application/problem+json"}
     )
-    default ResponseEntity<PersonListResponse> getPeople(@Min(1) @Max(1000) @ApiParam(value = "Standard pagination parameter. Defines the maximum number of entries returned in the response.", defaultValue = "10") @Valid @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit, @Min(0) @ApiParam(value = "Standard pagination parameter. Defines the number of entries to skip before beginning to return the search results.", defaultValue = "0") @Valid @RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset, @Size(max = 255) @ApiParam(value = "Person's email") @Valid @RequestParam(value = "email", required = false) String email, @ApiParam(value = "The comma-separated list of people roles to filter the search results. Only people with the given roles are provided. ") @Valid @RequestParam(value = "role", required = false) List<PersonRole> role) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"messengers\" : [ { \"socialNetworkId\" : \"TELEGRAM\", \"link\" : \"@VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" }, { \"socialNetworkId\" : \"TELEGRAM\", \"link\" : \"@VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" } ], \"role\" : \"LECTOR\", \"phoneNumber\" : \"+79211234567\", \"address\" : { \"city\" : \"Moscow\", \"street\" : \"Beethovenstrasse\", \"flat\" : 123, \"postalCode\" : \"123456\", \"houseNumber\" : 12, \"houseBuilding\" : 1, \"houseLetter\" : \"A\" }, \"identity\" : { \"firstName\" : \"Vasily\", \"lastName\" : \"Pupkin\", \"placeOfBirth\" : \"Moscow\", \"gender\" : \"MALE\", \"passport\" : { \"number\" : 123456, \"placeOfIssue\" : \"\", \"series\" : 1234, \"departmentCode\" : \"123-456\", \"dateOfIssue\" : \"1980-02-07T00:00:00.000+0000\" }, \"middleName\" : \"Ivanovich\", \"dateOfBirth\" : \"1980-02-07T00:00:00.000+0000\" }, \"socialNetworks\" : [ { \"socialNetworkId\" : \"LINKED_IN\", \"link\" : \"https://linkedin.com/person/VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" }, { \"socialNetworkId\" : \"LINKED_IN\", \"link\" : \"https://linkedin.com/person/VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" } ], \"id\" : \"123e4567-e89b-12d3-a456-426655440000\", \"email\" : \"person@mail.ru\" }, { \"messengers\" : [ { \"socialNetworkId\" : \"TELEGRAM\", \"link\" : \"@VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" }, { \"socialNetworkId\" : \"TELEGRAM\", \"link\" : \"@VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" } ], \"role\" : \"LECTOR\", \"phoneNumber\" : \"+79211234567\", \"address\" : { \"city\" : \"Moscow\", \"street\" : \"Beethovenstrasse\", \"flat\" : 123, \"postalCode\" : \"123456\", \"houseNumber\" : 12, \"houseBuilding\" : 1, \"houseLetter\" : \"A\" }, \"identity\" : { \"firstName\" : \"Vasily\", \"lastName\" : \"Pupkin\", \"placeOfBirth\" : \"Moscow\", \"gender\" : \"MALE\", \"passport\" : { \"number\" : 123456, \"placeOfIssue\" : \"\", \"series\" : 1234, \"departmentCode\" : \"123-456\", \"dateOfIssue\" : \"1980-02-07T00:00:00.000+0000\" }, \"middleName\" : \"Ivanovich\", \"dateOfBirth\" : \"1980-02-07T00:00:00.000+0000\" }, \"socialNetworks\" : [ { \"socialNetworkId\" : \"LINKED_IN\", \"link\" : \"https://linkedin.com/person/VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" }, { \"socialNetworkId\" : \"LINKED_IN\", \"link\" : \"https://linkedin.com/person/VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" } ], \"id\" : \"123e4567-e89b-12d3-a456-426655440000\", \"email\" : \"person@mail.ru\" } ], \"meta\" : { \"pagination\" : { \"offset\" : 10, \"limit\" : 25, \"totalCount\" : 252 } } }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
+    ResponseEntity<PersonListResponse> getPeople(@Min(1) @Max(1000) @ApiParam(value = "Standard pagination parameter. Defines the maximum number of entries returned in the response.", defaultValue = "10") @Valid @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit, @Min(0) @ApiParam(value = "Standard pagination parameter. Defines the number of entries to skip before beginning to return the search results.", defaultValue = "0") @Valid @RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset, @Size(max = 255) @ApiParam(value = "Person's email") @Valid @RequestParam(value = "email", required = false) String email, @ApiParam(value = "The comma-separated list of people roles to filter the search results. Only people with the given roles are provided. ") @Valid @RequestParam(value = "role", required = false) List<PersonRole> role);
 }

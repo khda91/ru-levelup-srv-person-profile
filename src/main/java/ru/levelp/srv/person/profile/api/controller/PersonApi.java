@@ -10,32 +10,23 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.context.request.NativeWebRequest;
-import ru.levelp.srv.person.profile.api.ApiUtil;
-import ru.levelp.srv.person.profile.model.CreatePersonData;
-import ru.levelp.srv.person.profile.model.PersonResponse;
-import ru.levelp.srv.person.profile.model.ProblemResponse;
+import ru.levelp.srv.person.profile.api.data.CreatePersonData;
+import ru.levelp.srv.person.profile.api.data.PersonResponse;
+import ru.levelp.srv.person.profile.api.data.ProblemResponse;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
-import java.util.Optional;
 
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-19T18:45:57.374415+03:00[Europe/Moscow]")
 @Validated
 @Api(value = "person", description = "the person API")
 public interface PersonApi {
-
-    default Optional<NativeWebRequest> getRequest() {
-        return Optional.empty();
-    }
 
     /**
      * POST /person
@@ -60,20 +51,7 @@ public interface PersonApi {
             produces = {"application/json", "application/problem+json"},
             consumes = {"application/json"}
     )
-    default ResponseEntity<PersonResponse> createPerson(@ApiParam(value = "") @Valid @RequestBody(required = false) CreatePersonData createPersonData) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"messengers\" : [ { \"socialNetworkId\" : \"TELEGRAM\", \"link\" : \"@VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" }, { \"socialNetworkId\" : \"TELEGRAM\", \"link\" : \"@VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" } ], \"role\" : \"LECTOR\", \"phoneNumber\" : \"+79211234567\", \"address\" : { \"city\" : \"Moscow\", \"street\" : \"Beethovenstrasse\", \"flat\" : 123, \"postalCode\" : \"123456\", \"houseNumber\" : 12, \"houseBuilding\" : 1, \"houseLetter\" : \"A\" }, \"identity\" : { \"firstName\" : \"Vasily\", \"lastName\" : \"Pupkin\", \"placeOfBirth\" : \"Moscow\", \"gender\" : \"MALE\", \"passport\" : { \"number\" : 123456, \"placeOfIssue\" : \"\", \"series\" : 1234, \"departmentCode\" : \"123-456\", \"dateOfIssue\" : \"1980-02-07T00:00:00.000+0000\" }, \"middleName\" : \"Ivanovich\", \"dateOfBirth\" : \"1980-02-07T00:00:00.000+0000\" }, \"socialNetworks\" : [ { \"socialNetworkId\" : \"LINKED_IN\", \"link\" : \"https://linkedin.com/person/VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" }, { \"socialNetworkId\" : \"LINKED_IN\", \"link\" : \"https://linkedin.com/person/VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" } ], \"id\" : \"123e4567-e89b-12d3-a456-426655440000\", \"email\" : \"person@mail.ru\" } }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
+    ResponseEntity<PersonResponse> createPerson(@ApiParam(value = "") @Valid @RequestBody(required = false) CreatePersonData createPersonData);
 
     /**
      * GET /person/{personId}
@@ -97,18 +75,5 @@ public interface PersonApi {
             value = "/person/{personId}",
             produces = {"application/json", "application/problem+json"}
     )
-    default ResponseEntity<PersonResponse> getPerson(@Pattern(regexp = "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$") @ApiParam(value = "Universally unique identifier of the person.", required = true) @PathVariable("personId") String personId) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"messengers\" : [ { \"socialNetworkId\" : \"TELEGRAM\", \"link\" : \"@VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" }, { \"socialNetworkId\" : \"TELEGRAM\", \"link\" : \"@VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" } ], \"role\" : \"LECTOR\", \"phoneNumber\" : \"+79211234567\", \"address\" : { \"city\" : \"Moscow\", \"street\" : \"Beethovenstrasse\", \"flat\" : 123, \"postalCode\" : \"123456\", \"houseNumber\" : 12, \"houseBuilding\" : 1, \"houseLetter\" : \"A\" }, \"identity\" : { \"firstName\" : \"Vasily\", \"lastName\" : \"Pupkin\", \"placeOfBirth\" : \"Moscow\", \"gender\" : \"MALE\", \"passport\" : { \"number\" : 123456, \"placeOfIssue\" : \"\", \"series\" : 1234, \"departmentCode\" : \"123-456\", \"dateOfIssue\" : \"1980-02-07T00:00:00.000+0000\" }, \"middleName\" : \"Ivanovich\", \"dateOfBirth\" : \"1980-02-07T00:00:00.000+0000\" }, \"socialNetworks\" : [ { \"socialNetworkId\" : \"LINKED_IN\", \"link\" : \"https://linkedin.com/person/VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" }, { \"socialNetworkId\" : \"LINKED_IN\", \"link\" : \"https://linkedin.com/person/VasilyPupkin\", \"personId\" : \"123e4567-e89b-12d3-a456-426655440000\", \"id\" : \"123e4567-e89b-12d3-a456-426655440000\" } ], \"id\" : \"123e4567-e89b-12d3-a456-426655440000\", \"email\" : \"person@mail.ru\" } }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
+    ResponseEntity<PersonResponse> getPerson(@Pattern(regexp = "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$") @ApiParam(value = "Universally unique identifier of the person.", required = true) @PathVariable("personId") String personId);
 }

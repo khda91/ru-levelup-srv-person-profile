@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.6.7'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.liquibase.gradle' version '2.1.1'
 }
 
 group = 'ru.levelp.services'
@@ -18,14 +19,29 @@ repositories {
 
 dependencies {
     ext {
+        assertjVersion = '3.22.0'
         beanutilsVersion = '1.9.4'
+        commonsCollectionsVersion = '4.4'
         commonsIoVersion = '2.11.0'
+        dbunitVersion = '2.7.3'
+        gradleLiquibaseVersion = '2.1.1'
         jacksonVersion = '2.13.3'
         jacksonDatabindNullableVersion = '0.2.2'
         javaxValidationVersion = '2.0.1.Final'
+        javaFakerVersion = '1.0.2'
+        mapStructVersion = '1.4.2.Final'
+        mockitoVersion = '4.5.1'
+        liquibaseCoreVersion = '4.10.0'
+        logbackVersion = '1.2.11'
+        lombokMapstructBindingsVersion = '0.2.0'
         lombokVersion = '1.18.24'
+        postgresqlVersion = '42.3.5'
+        sfmVersion = '8.2.3'
+        snakeyamlVersion = '1.30'
+        springTestDbunitVersion = '1.3.0'
         springfoxVersion = '3.0.0'
         swaggerAnnotationsVersion = '2.2.0'
+        testContainersVersion = '1.17.1'
     }
 
     // spring
@@ -33,10 +49,13 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-aop"
-    implementation "org.springframework.boot:spring-boot-starter-test"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
 
     // commons-beanutils
     implementation "commons-beanutils:commons-beanutils:${beanutilsVersion}"
+
+    // simple flat mapper
+    implementation "org.simpleflatmapper:sfm-springjdbc:${sfmVersion}"
 
     // swagger
     implementation "io.springfox:springfox-swagger2:${springfoxVersion}"
@@ -50,7 +69,10 @@ dependencies {
     // apache commons io
     implementation "commons-io:commons-io:${commonsIoVersion}"
 
-    // jackson xml
+    // apache commons collections
+    implementation "org.apache.commons:commons-collections4:${commonsCollectionsVersion}"
+
+    // jackson
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
 
@@ -58,9 +80,53 @@ dependencies {
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingsVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    // mapstruct
+    compileOnly "org.mapstruct:mapstruct:${mapStructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+
+    // postgresql
+    runtimeOnly "org.postgresql:postgresql:${postgresqlVersion}"
+
+    // liquibase
+    liquibaseRuntime "org.liquibase:liquibase-gradle-plugin:${gradleLiquibaseVersion}"
+    liquibaseRuntime "org.postgresql:postgresql"
+    liquibaseRuntime "org.yaml:snakeyaml:${snakeyamlVersion}"
+    liquibaseRuntime "ch.qos.logback:logback-classic:${logbackVersion}"
+    liquibaseRuntime "org.liquibase:liquibase-core:${liquibaseCoreVersion}"
+
+    // testing
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
+    testImplementation "org.mockito:mockito-inline:${mockitoVersion}"
+    testImplementation ("com.github.javafaker:javafaker:${javaFakerVersion}") {
+        exclude group: "org.yaml", module: "snakeyaml"
+    }
+
+    // dbunit
+    testImplementation ("org.dbunit:dbunit:${dbunitVersion}") {
+        exclude group: "junit", module: "junit"
+        exclude group: "org.postgresql", module: "postgresql"
+    }
+    testImplementation "com.github.springtestdbunit:spring-test-dbunit:${springTestDbunitVersion}"
+
+    // test containers
+    testImplementation "org.testcontainers:junit-jupiter:${testContainersVersion}"
+    testImplementation "org.testcontainers:postgresql:${testContainersVersion}"
 }
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+    options.compilerArgs = [
+            '-Amapstruct.suppressGeneratorTimestamp=true',
+            '-Amapstruct.unmappedTargetPolicy=IGNORE',
+            '-parameters'
+    ]
+}
+
+configurations {
+    testAnnotationProcessor.extendsFrom annotationProcessor
+    testCompileOnly.extendsFrom compileOnly
 }

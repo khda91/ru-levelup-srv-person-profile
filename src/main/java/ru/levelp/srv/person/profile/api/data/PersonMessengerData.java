@@ -1,20 +1,18 @@
-package ru.levelp.srv.person.profile.model;
+package ru.levelp.srv.person.profile.api.data;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.openapitools.jackson.nullable.JsonNullable;
-import javax.validation.Valid;
+
 import javax.validation.constraints.*;
 
 /**
- * Represents a social networks of a person.
+ * Represents a messengers of a person.
  */
-@ApiModel(description = "Represents a social networks of a person.")
+@ApiModel(description = "Represents a messengers of a person.")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-19T18:45:57.374415+03:00[Europe/Moscow]")
-public class PersonSocialNetworkData   {
+public class PersonMessengerData   {
   @JsonProperty("id")
   private String id;
 
@@ -27,16 +25,16 @@ public class PersonSocialNetworkData   {
   @JsonProperty("link")
   private String link;
 
-  public PersonSocialNetworkData id(String id) {
+  public PersonMessengerData id(String id) {
     this.id = id;
     return this;
   }
 
   /**
-   * Universally unique and immutable identifier of the person social network.
+   * Universally unique and immutable identifier of the person messenger.
    * @return id
   */
-  @ApiModelProperty(example = "123e4567-e89b-12d3-a456-426655440000", value = "Universally unique and immutable identifier of the person social network.")
+  @ApiModelProperty(example = "123e4567-e89b-12d3-a456-426655440000", value = "Universally unique and immutable identifier of the person messenger.")
 
 @Size(max=255)
   public String getId() {
@@ -47,7 +45,7 @@ public class PersonSocialNetworkData   {
     this.id = id;
   }
 
-  public PersonSocialNetworkData personId(String personId) {
+  public PersonMessengerData personId(String personId) {
     this.personId = personId;
     return this;
   }
@@ -67,16 +65,16 @@ public class PersonSocialNetworkData   {
     this.personId = personId;
   }
 
-  public PersonSocialNetworkData socialNetworkId(String socialNetworkId) {
+  public PersonMessengerData socialNetworkId(String socialNetworkId) {
     this.socialNetworkId = socialNetworkId;
     return this;
   }
 
   /**
-   * Universally unique and immutable identifier of the social network.
+   * Universally unique and immutable identifier of the messenger.
    * @return socialNetworkId
   */
-  @ApiModelProperty(example = "LINKED_IN", value = "Universally unique and immutable identifier of the social network.")
+  @ApiModelProperty(example = "TELEGRAM", value = "Universally unique and immutable identifier of the messenger.")
 
 @Size(max=255)
   public String getSocialNetworkId() {
@@ -87,16 +85,16 @@ public class PersonSocialNetworkData   {
     this.socialNetworkId = socialNetworkId;
   }
 
-  public PersonSocialNetworkData link(String link) {
+  public PersonMessengerData link(String link) {
     this.link = link;
     return this;
   }
 
   /**
-   * Link to the person's profile in social network
+   * Link to the person's profile in messenger
    * @return link
   */
-  @ApiModelProperty(example = "https://linkedin.com/person/VasilyPupkin", value = "Link to the person's profile in social network")
+  @ApiModelProperty(example = "@VasilyPupkin", value = "Link to the person's profile in messenger")
 
 @Size(max=255)
   public String getLink() {
@@ -116,11 +114,11 @@ public class PersonSocialNetworkData   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PersonSocialNetworkData personSocialNetworkData = (PersonSocialNetworkData) o;
-    return Objects.equals(this.id, personSocialNetworkData.id) &&
-        Objects.equals(this.personId, personSocialNetworkData.personId) &&
-        Objects.equals(this.socialNetworkId, personSocialNetworkData.socialNetworkId) &&
-        Objects.equals(this.link, personSocialNetworkData.link);
+    PersonMessengerData personMessengerData = (PersonMessengerData) o;
+    return Objects.equals(this.id, personMessengerData.id) &&
+        Objects.equals(this.personId, personMessengerData.personId) &&
+        Objects.equals(this.socialNetworkId, personMessengerData.socialNetworkId) &&
+        Objects.equals(this.link, personMessengerData.link);
   }
 
   @Override
@@ -131,7 +129,7 @@ public class PersonSocialNetworkData   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PersonSocialNetworkData {\n");
+    sb.append("class PersonMessengerData {\n");
 
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    personId: ").append(toIndentedString(personId)).append("\n");

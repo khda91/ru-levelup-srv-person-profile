@@ -1,4 +1,4 @@
-package ru.levelp.srv.person.profile.model;
+package ru.levelp.srv.person.profile.api.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
