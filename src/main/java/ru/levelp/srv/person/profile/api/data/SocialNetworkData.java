@@ -4,36 +4,35 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
-@ApiModel(description = "Response containing a person profile.")
-public class PersonResponse {
-    @JsonProperty("data")
-    private PersonData data;
+@ApiModel(description = "Representing a unique social network")
+public class SocialNetworkData {
+    @JsonProperty("id")
+    private String id;
 
-    public PersonResponse data(PersonData data) {
-        this.data = data;
+    public SocialNetworkData id(String id) {
+        this.id = id;
         return this;
     }
 
     /**
-     * Get data
+     * Universally unique and immutable identifier of the social network.
      *
-     * @return data
+     * @return id
      */
-    @ApiModelProperty(required = true, value = "")
+    @ApiModelProperty(example = "LINKED_IN", required = true, value = "Universally unique and immutable identifier of the social network.")
     @NotNull
 
-    @Valid
-
-    public PersonData getData() {
-        return data;
+    @Size(max = 255)
+    public String getId() {
+        return id;
     }
 
-    public void setData(PersonData data) {
-        this.data = data;
+    public void setId(String id) {
+        this.id = id;
     }
 
 
@@ -45,21 +44,21 @@ public class PersonResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PersonResponse personResponse = (PersonResponse) o;
-        return Objects.equals(this.data, personResponse.data);
+        SocialNetworkData socialNetworkData = (SocialNetworkData) o;
+        return Objects.equals(this.id, socialNetworkData.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(data);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PersonResponse {\n");
+        sb.append("class SocialNetworkData {\n");
 
-        sb.append("    data: ").append(toIndentedString(data)).append("\n");
+        sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("}");
         return sb.toString();
     }

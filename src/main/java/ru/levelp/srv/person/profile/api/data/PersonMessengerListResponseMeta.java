@@ -8,32 +8,32 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-@ApiModel(description = "Response containing a person profile.")
-public class PersonResponse {
-    @JsonProperty("data")
-    private PersonData data;
+@ApiModel(description = "Meta information for the provided results.")
+public class PersonMessengerListResponseMeta {
+    @JsonProperty("pagination")
+    private PaginationData pagination;
 
-    public PersonResponse data(PersonData data) {
-        this.data = data;
+    public PersonMessengerListResponseMeta pagination(PaginationData pagination) {
+        this.pagination = pagination;
         return this;
     }
 
     /**
-     * Get data
+     * Get pagination
      *
-     * @return data
+     * @return pagination
      */
     @ApiModelProperty(required = true, value = "")
     @NotNull
 
     @Valid
 
-    public PersonData getData() {
-        return data;
+    public PaginationData getPagination() {
+        return pagination;
     }
 
-    public void setData(PersonData data) {
-        this.data = data;
+    public void setPagination(PaginationData pagination) {
+        this.pagination = pagination;
     }
 
 
@@ -45,21 +45,21 @@ public class PersonResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PersonResponse personResponse = (PersonResponse) o;
-        return Objects.equals(this.data, personResponse.data);
+        PersonMessengerListResponseMeta personMessengerListResponseMeta = (PersonMessengerListResponseMeta) o;
+        return Objects.equals(this.pagination, personMessengerListResponseMeta.pagination);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(data);
+        return Objects.hash(pagination);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PersonResponse {\n");
+        sb.append("class PersonMessengerListResponseMeta {\n");
 
-        sb.append("    data: ").append(toIndentedString(data)).append("\n");
+        sb.append("    pagination: ").append(toIndentedString(pagination)).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -12,13 +12,12 @@ import ru.levelp.srv.person.profile.model.Person;
 import ru.levelp.srv.person.profile.repository.PersonRepository;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 @AllArgsConstructor
-public class PersonService {
+public class PeopleService {
 
     private final PersonRepository personRepository;
 

@@ -8,11 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-/**
- * Metainformation for the provided results.
- */
 @ApiModel(description = "Metainformation for the provided results.")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-19T18:45:57.374415+03:00[Europe/Moscow]")
 public class PersonListResponseMeta {
     @JsonProperty("pagination")
     private PaginationData pagination;

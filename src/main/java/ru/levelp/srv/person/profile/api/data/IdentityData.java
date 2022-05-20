@@ -9,11 +9,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
-/**
- * Represents a person&#39;s personal data
- */
 @ApiModel(description = "Represents a person's personal data")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-19T18:45:57.374415+03:00[Europe/Moscow]")
 public class IdentityData {
     @JsonProperty("firstName")
     private String firstName;

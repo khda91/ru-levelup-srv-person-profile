@@ -9,11 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-/**
- * Represents attributes required to create a new person record.
- */
 @ApiModel(description = "Represents attributes required to create a new person record.")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-19T18:45:57.374415+03:00[Europe/Moscow]")
 public class CreatePersonData {
     @JsonProperty("role")
     private PersonRole role;
@@ -40,6 +36,7 @@ public class CreatePersonData {
 
     /**
      * Get role
+     *
      * @return role
      */
     @ApiModelProperty(required = true, value = "")
@@ -62,12 +59,13 @@ public class CreatePersonData {
 
     /**
      * Email of the person.
+     *
      * @return email
      */
     @ApiModelProperty(example = "person@mail.ru", required = true, value = "Email of the person.")
     @NotNull
 
-    @Size(max=255)
+    @Size(max = 255)
     public String getEmail() {
         return email;
     }
@@ -83,12 +81,13 @@ public class CreatePersonData {
 
     /**
      * Phone number of the person.
+     *
      * @return phoneNumber
      */
     @ApiModelProperty(example = "+79211234567", required = true, value = "Phone number of the person.")
     @NotNull
 
-    @Size(max=255)
+    @Size(max = 255)
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -104,11 +103,12 @@ public class CreatePersonData {
 
     /**
      * Place of work of the person.
+     *
      * @return placeOfWork
      */
     @ApiModelProperty(example = "Engineer", value = "Place of work of the person.")
 
-    @Size(max=255)
+    @Size(max = 255)
     public String getPlaceOfWork() {
         return placeOfWork;
     }
@@ -124,6 +124,7 @@ public class CreatePersonData {
 
     /**
      * Get identity
+     *
      * @return identity
      */
     @ApiModelProperty(value = "")
@@ -145,6 +146,7 @@ public class CreatePersonData {
 
     /**
      * Get address
+     *
      * @return address
      */
     @ApiModelProperty(value = "")

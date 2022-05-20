@@ -12,11 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Problem details serialized according to RFC 7807.
- */
 @ApiModel(description = "Problem details serialized according to RFC 7807.")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-19T18:45:57.374415+03:00[Europe/Moscow]")
 public class ProblemResponse {
     @JsonProperty("type")
     private String type;

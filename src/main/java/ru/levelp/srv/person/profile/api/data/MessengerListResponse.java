@@ -10,21 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@ApiModel(description = "Response containing a list of person profiles.")
-public class PersonListResponse {
+@ApiModel(description = "Response containing a list of messengers.")
+public class MessengerListResponse {
     @JsonProperty("data")
     @Valid
-    private List<PersonData> data = new ArrayList<>();
+    private List<MessengerData> data = new ArrayList<>();
 
     @JsonProperty("meta")
-    private PersonListResponseMeta meta;
+    private PersonMessengerListResponseMeta meta;
 
-    public PersonListResponse data(List<PersonData> data) {
+    public MessengerListResponse data(List<MessengerData> data) {
         this.data = data;
         return this;
     }
 
-    public PersonListResponse addDataItem(PersonData dataItem) {
+    public MessengerListResponse addDataItem(MessengerData dataItem) {
         this.data.add(dataItem);
         return this;
     }
@@ -39,15 +39,15 @@ public class PersonListResponse {
 
     @Valid
 
-    public List<PersonData> getData() {
+    public List<MessengerData> getData() {
         return data;
     }
 
-    public void setData(List<PersonData> data) {
+    public void setData(List<MessengerData> data) {
         this.data = data;
     }
 
-    public PersonListResponse meta(PersonListResponseMeta meta) {
+    public MessengerListResponse meta(PersonMessengerListResponseMeta meta) {
         this.meta = meta;
         return this;
     }
@@ -62,11 +62,11 @@ public class PersonListResponse {
 
     @Valid
 
-    public PersonListResponseMeta getMeta() {
+    public PersonMessengerListResponseMeta getMeta() {
         return meta;
     }
 
-    public void setMeta(PersonListResponseMeta meta) {
+    public void setMeta(PersonMessengerListResponseMeta meta) {
         this.meta = meta;
     }
 
@@ -79,9 +79,9 @@ public class PersonListResponse {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PersonListResponse personListResponse = (PersonListResponse) o;
-        return Objects.equals(this.data, personListResponse.data) &&
-                Objects.equals(this.meta, personListResponse.meta);
+        MessengerListResponse messengerListResponse = (MessengerListResponse) o;
+        return Objects.equals(this.data, messengerListResponse.data) &&
+                Objects.equals(this.meta, messengerListResponse.meta);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class PersonListResponse {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PersonListResponse {\n");
+        sb.append("class MessengerListResponse {\n");
 
         sb.append("    data: ").append(toIndentedString(data)).append("\n");
         sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
