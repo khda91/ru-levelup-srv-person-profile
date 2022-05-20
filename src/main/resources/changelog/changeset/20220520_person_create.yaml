@@ -57,7 +57,7 @@ databaseChangeLog:
                   type: date
               - column:
                   name: department_code
-                  type: char(7)
+                  type: varchar(7)
               - column:
                   name: street
                   type: varchar(255)
@@ -69,7 +69,7 @@ databaseChangeLog:
                   type: number(6)
               - column:
                   name: house_letter
-                  type: char(1)
+                  type: varchar(1)
               - column:
                   name: flat
                   type: number(6)

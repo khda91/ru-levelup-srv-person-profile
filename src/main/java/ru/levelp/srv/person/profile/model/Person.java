@@ -33,7 +33,7 @@ public class Person {
     private String street;
     private Integer houseNumber;
     private Integer houseBuilding;
-    private Character houseLetter;
+    private String houseLetter;
     private Integer flat;
     private String city;
     private Integer postalCode;

@@ -24,6 +24,9 @@ public class CreatePersonData {
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
+    @JsonProperty("placeOfWork")
+    private String placeOfWork;
+
     @JsonProperty("identity")
     private IdentityData identity;
 
@@ -37,7 +40,6 @@ public class CreatePersonData {
 
     /**
      * Get role
-     *
      * @return role
      */
     @ApiModelProperty(required = true, value = "")
@@ -60,13 +62,12 @@ public class CreatePersonData {
 
     /**
      * Email of the person.
-     *
      * @return email
      */
     @ApiModelProperty(example = "person@mail.ru", required = true, value = "Email of the person.")
     @NotNull
 
-    @Size(max = 255)
+    @Size(max=255)
     public String getEmail() {
         return email;
     }
@@ -82,19 +83,38 @@ public class CreatePersonData {
 
     /**
      * Phone number of the person.
-     *
      * @return phoneNumber
      */
     @ApiModelProperty(example = "+79211234567", required = true, value = "Phone number of the person.")
     @NotNull
 
-    @Size(max = 255)
+    @Size(max=255)
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public CreatePersonData placeOfWork(String placeOfWork) {
+        this.placeOfWork = placeOfWork;
+        return this;
+    }
+
+    /**
+     * Place of work of the person.
+     * @return placeOfWork
+     */
+    @ApiModelProperty(example = "Engineer", value = "Place of work of the person.")
+
+    @Size(max=255)
+    public String getPlaceOfWork() {
+        return placeOfWork;
+    }
+
+    public void setPlaceOfWork(String placeOfWork) {
+        this.placeOfWork = placeOfWork;
     }
 
     public CreatePersonData identity(IdentityData identity) {
@@ -104,7 +124,6 @@ public class CreatePersonData {
 
     /**
      * Get identity
-     *
      * @return identity
      */
     @ApiModelProperty(value = "")
@@ -126,7 +145,6 @@ public class CreatePersonData {
 
     /**
      * Get address
-     *
      * @return address
      */
     @ApiModelProperty(value = "")
@@ -154,13 +172,14 @@ public class CreatePersonData {
         return Objects.equals(this.role, createPersonData.role) &&
                 Objects.equals(this.email, createPersonData.email) &&
                 Objects.equals(this.phoneNumber, createPersonData.phoneNumber) &&
+                Objects.equals(this.placeOfWork, createPersonData.placeOfWork) &&
                 Objects.equals(this.identity, createPersonData.identity) &&
                 Objects.equals(this.address, createPersonData.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(role, email, phoneNumber, identity, address);
+        return Objects.hash(role, email, phoneNumber, placeOfWork, identity, address);
     }
 
     @Override
@@ -171,6 +190,7 @@ public class CreatePersonData {
         sb.append("    role: ").append(toIndentedString(role)).append("\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
         sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
+        sb.append("    placeOfWork: ").append(toIndentedString(placeOfWork)).append("\n");
         sb.append("    identity: ").append(toIndentedString(identity)).append("\n");
         sb.append("    address: ").append(toIndentedString(address)).append("\n");
         sb.append("}");

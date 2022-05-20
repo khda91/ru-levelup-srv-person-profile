@@ -40,4 +40,4 @@ build/
 out
 src/main/generated
 
-**/logs/*
+**/logs

@@ -29,6 +29,9 @@ public class PersonData {
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
+    @JsonProperty("placeOfWork")
+    private String placeOfWork;
+
     @JsonProperty("identity")
     private IdentityData identity;
 
@@ -130,6 +133,27 @@ public class PersonData {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public PersonData placeOfWork(String placeOfWork) {
+        this.placeOfWork = placeOfWork;
+        return this;
+    }
+
+    /**
+     * Place of work of the person.
+     *
+     * @return placeOfWork
+     */
+    @ApiModelProperty(example = "Engineer", value = "Place of work of the person.")
+
+    @Size(max = 255)
+    public String getPlaceOfWork() {
+        return placeOfWork;
+    }
+
+    public void setPlaceOfWork(String placeOfWork) {
+        this.placeOfWork = placeOfWork;
     }
 
     public PersonData identity(IdentityData identity) {
@@ -246,6 +270,7 @@ public class PersonData {
                 Objects.equals(this.role, personData.role) &&
                 Objects.equals(this.email, personData.email) &&
                 Objects.equals(this.phoneNumber, personData.phoneNumber) &&
+                Objects.equals(this.placeOfWork, personData.placeOfWork) &&
                 Objects.equals(this.identity, personData.identity) &&
                 Objects.equals(this.address, personData.address) &&
                 Objects.equals(this.socialNetworks, personData.socialNetworks) &&
@@ -254,7 +279,7 @@ public class PersonData {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, role, email, phoneNumber, identity, address, socialNetworks, messengers);
+        return Objects.hash(id, role, email, phoneNumber, placeOfWork, identity, address, socialNetworks, messengers);
     }
 
     @Override
@@ -266,6 +291,7 @@ public class PersonData {
         sb.append("    role: ").append(toIndentedString(role)).append("\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
         sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
+        sb.append("    placeOfWork: ").append(toIndentedString(placeOfWork)).append("\n");
         sb.append("    identity: ").append(toIndentedString(identity)).append("\n");
         sb.append("    address: ").append(toIndentedString(address)).append("\n");
         sb.append("    socialNetworks: ").append(toIndentedString(socialNetworks)).append("\n");
