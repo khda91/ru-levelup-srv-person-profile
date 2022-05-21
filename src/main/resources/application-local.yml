@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /srv-person-profile
+
+spring:
+  application:
+    name: ru-levelp-srv-person-profile
+  datasource:
+    url: jdbc:postgresql://localhost:5432/person_profile?createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: person_profile
+    password: password
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: INFO

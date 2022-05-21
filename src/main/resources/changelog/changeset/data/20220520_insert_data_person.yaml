@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: levelp-person-insert-test-data
+      author: d.khodakovsky
+      runOnChange: true
+      changes:
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: id
+                  value: "ec9655d2-e35d-4f45-be81-7ed4abc7cdc9"
+              - column:
+                  name: email
+                  value: "testemail@email.com"
+              - column:
+                  name: phone_number
+                  value: +79999999999
+              - column:
+                  name: role
+                  value: "STUDENT"
+              - column:
+                  name: first_name
+                  value: "Ivan"
+              - column:
+                  name: last_name
+                  value: "Ivanov"
+              - column:
+                  name: middle_name
+                  value: "Ivanovich"
+              - column:
+                  name: gender
+                  value: "MALE"
+              - column:
+                  name: date_of_birth
+                  value: "1990-04-14"
+              - column:
+                  name: place_of_birth
+                  value: "Test place of birth"
+              - column:
+                  name: place_of_work
+                  value: "Test place of work"
+              - column:
+                  name: passport_series
+                  value: 1234
+              - column:
+                  name: passport_number
+                  value: 123456
+              - column:
+                  name: place_of_issue
+                  value: "Test place of issue"
+              - column:
+                  name: date_of_issue
+                  value: "2000-04-30"
+              - column:
+                  name: department_code
+                  value: "123-987"
+              - column:
+                  name: street
+                  value: "Test Street"
+              - column:
+                  name: house_number
+                  value: 12
+              - column:
+                  name: house_building
+                  value: 3
+              - column:
+                  name: house_letter
+                  value: 'D'
+              - column:
+                  name: flat
+                  value: 555
+              - column:
+                  name: city
+                  value: "Test city"
+              - column:
+                  name: postal_code
+                  value: 987654

@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - include:
+      file: ./changeset/20220520_person_create.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: ./changeset/20220520_messenger_create.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: ./changeset/20220520_social_network_create.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: ./changeset/data/20220520_insert_data_person.yaml
+      relativeToChangelogFile: true
+      context: dev, test
+  - include:
+      file: ./changeset/data/20220520_insert_person_messenger.yaml
+      relativeToChangelogFile: true
+      context: dev, test
+  - include:
+      file: ./changeset/data/20220520_insert_person_social_network.yaml
+      relativeToChangelogFile: true
+      context: dev, test

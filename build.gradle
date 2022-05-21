@@ -1,0 +1,176 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.liquibase.gradle' version '2.1.1'
+    id 'jacoco'
+}
+
+group = 'ru.levelp.services'
+version = '1.0'
+description = 'person-profile'
+java.sourceCompatibility = JavaVersion.VERSION_11
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+dependencies {
+    ext {
+        assertjVersion = '3.22.0'
+        beanutilsVersion = '1.9.4'
+        commonsCollectionsVersion = '4.4'
+        commonsIoVersion = '2.11.0'
+        dbunitVersion = '2.7.3'
+        gradleLiquibaseVersion = '2.1.1'
+        jacksonVersion = '2.13.3'
+        jacksonDatabindNullableVersion = '0.2.2'
+        javaxValidationVersion = '2.0.1.Final'
+        javaFakerVersion = '1.0.2'
+        mapStructVersion = '1.4.2.Final'
+        mockitoVersion = '4.5.1'
+        liquibaseCoreVersion = '4.10.0'
+        logbackVersion = '1.2.11'
+        lombokMapstructBindingsVersion = '0.2.0'
+        lombokVersion = '1.18.24'
+        postgresqlVersion = '42.3.5'
+        sfmVersion = '8.2.3'
+        snakeyamlVersion = '1.30'
+        springTestDbunitVersion = '1.3.0'
+        springfoxVersion = '3.0.0'
+        swaggerAnnotationsVersion = '2.2.0'
+        testContainersVersion = '1.17.1'
+    }
+
+    // spring
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-aop"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+
+    // commons-beanutils
+    implementation "commons-beanutils:commons-beanutils:${beanutilsVersion}"
+
+    // simple flat mapper
+    implementation "org.simpleflatmapper:sfm-springjdbc:${sfmVersion}"
+
+    // swagger
+    implementation "io.springfox:springfox-swagger2:${springfoxVersion}"
+    implementation "io.springfox:springfox-swagger-ui:${springfoxVersion}"
+    implementation "javax.validation:validation-api:${javaxValidationVersion}"
+    implementation "io.swagger.core.v3:swagger-annotations:${swaggerAnnotationsVersion}"
+    implementation ("org.openapitools:jackson-databind-nullable:${jacksonDatabindNullableVersion}") {
+        exclude group: "com.fasterxml.jackson.core", module: "jackson-databind"
+    }
+
+    // apache commons io
+    implementation "commons-io:commons-io:${commonsIoVersion}"
+
+    // apache commons collections
+    implementation "org.apache.commons:commons-collections4:${commonsCollectionsVersion}"
+
+    // jackson
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
+
+    // lombok
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingsVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    // mapstruct
+    compileOnly "org.mapstruct:mapstruct:${mapStructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+
+    // postgresql
+    runtimeOnly "org.postgresql:postgresql:${postgresqlVersion}"
+
+    // liquibase
+    liquibaseRuntime "org.liquibase:liquibase-gradle-plugin:${gradleLiquibaseVersion}"
+    liquibaseRuntime "org.postgresql:postgresql"
+    liquibaseRuntime "org.yaml:snakeyaml:${snakeyamlVersion}"
+    liquibaseRuntime "org.liquibase:liquibase-core:${liquibaseCoreVersion}"
+    liquibaseRuntime "ch.qos.logback:logback-classic:${logbackVersion}"
+    liquibaseRuntime "org.liquibase:liquibase-core:${liquibaseCoreVersion}"
+
+    // testing
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.liquibase:liquibase-core"
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
+    testImplementation "org.mockito:mockito-inline:${mockitoVersion}"
+    testImplementation ("com.github.javafaker:javafaker:${javaFakerVersion}") {
+        exclude group: "org.yaml", module: "snakeyaml"
+    }
+
+    // dbunit
+    testImplementation ("org.dbunit:dbunit:${dbunitVersion}") {
+        exclude group: "junit", module: "junit"
+        exclude group: "org.postgresql", module: "postgresql"
+    }
+    testImplementation "com.github.springtestdbunit:spring-test-dbunit:${springTestDbunitVersion}"
+
+    // test containers
+    testImplementation "org.testcontainers:junit-jupiter:${testContainersVersion}"
+    testImplementation "org.testcontainers:postgresql:${testContainersVersion}"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.compilerArgs = [
+            '-Amapstruct.suppressGeneratorTimestamp=true',
+            '-Amapstruct.unmappedTargetPolicy=IGNORE',
+            '-parameters'
+    ]
+}
+
+configurations {
+    testAnnotationProcessor.extendsFrom annotationProcessor
+    testCompileOnly.extendsFrom compileOnly
+}
+
+liquibase {
+    activities {
+        dbupdate {
+            changeLogFile 'src/main/resources/changelog/changelog-master.yaml'
+            url "jdbc:mysql://localhost:5432/${project.hasProperty("database_name") ? project.ext.database_name : ''}?"
+            username project.hasProperty("database_user") ? project.ext.database_user : ''
+            password project.hasProperty("database_password") ? project.ext.database_password : ''
+            contexts project.hasProperty("liquibase_contexts") ? project.ext.liquibase_contexts : 'prod'
+        }
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        html.enabled true
+        xml.enabled true
+        xml.destination file("${buildDir}/reports/jacocoTestReport.xml")
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'ru/levelp/srv/person/profile/api/data/*',
+                    'ru/levelp/srv/person/profile/configuration/*/**',
+                    'ru/levelp/srv/person/profile/model/*',
+                    'ru/levelp/srv/person/profile/Application.*'
+            ])
+        }))
+    }
+}
+
+test {
+    useJUnitPlatform()
+    outputs.upToDateWhen { false }
+    finalizedBy jacocoTestReport
+}
