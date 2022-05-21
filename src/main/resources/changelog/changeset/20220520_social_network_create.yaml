@@ -33,7 +33,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: "LINKED IN"
+                  value: "LINKED_IN"
 
   - changeSet:
       id: levelp-person-social-network-create-table

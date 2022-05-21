@@ -1,0 +1,11 @@
+spring:
+  liquibase:
+    contexts: prod
+    change-log: classpath:changelog/changelog-master.yaml
+  application:
+    name: ru-levelp-srv-person-profile
+
+logging:
+  config: classpath:logback-spring-test.xml
+  level:
+    root: INFO

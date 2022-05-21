@@ -30,7 +30,7 @@ databaseChangeLog:
                   value: "ec9655d2-e35d-4f45-be81-7ed4abc7cdc9"
               - column:
                   name: messenger_id
-                  value: "WHATS UP"
+                  value: "WHATS_UP"
               - column:
                   name: nickname
                   value: "@iivanov"

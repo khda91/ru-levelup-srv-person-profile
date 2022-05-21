@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.7'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'org.liquibase.gradle' version '2.1.1'
+    id 'jacoco'
 }
 
 group = 'ru.levelp.services'
@@ -94,11 +95,13 @@ dependencies {
     liquibaseRuntime "org.liquibase:liquibase-gradle-plugin:${gradleLiquibaseVersion}"
     liquibaseRuntime "org.postgresql:postgresql"
     liquibaseRuntime "org.yaml:snakeyaml:${snakeyamlVersion}"
+    liquibaseRuntime "org.liquibase:liquibase-core:${liquibaseCoreVersion}"
     liquibaseRuntime "ch.qos.logback:logback-classic:${logbackVersion}"
     liquibaseRuntime "org.liquibase:liquibase-core:${liquibaseCoreVersion}"
 
     // testing
     testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.liquibase:liquibase-core"
     testImplementation "org.assertj:assertj-core:${assertjVersion}"
     testImplementation "org.mockito:mockito-inline:${mockitoVersion}"
     testImplementation ("com.github.javafaker:javafaker:${javaFakerVersion}") {
@@ -141,4 +144,33 @@ liquibase {
             contexts project.hasProperty("liquibase_contexts") ? project.ext.liquibase_contexts : 'prod'
         }
     }
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        html.enabled true
+        xml.enabled true
+        xml.destination file("${buildDir}/reports/jacocoTestReport.xml")
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'ru/levelp/srv/person/profile/api/data/*',
+                    'ru/levelp/srv/person/profile/configuration/*/**',
+                    'ru/levelp/srv/person/profile/model/*',
+                    'ru/levelp/srv/person/profile/Application.*'
+            ])
+        }))
+    }
+}
+
+test {
+    useJUnitPlatform()
+    outputs.upToDateWhen { false }
+    finalizedBy jacocoTestReport
 }

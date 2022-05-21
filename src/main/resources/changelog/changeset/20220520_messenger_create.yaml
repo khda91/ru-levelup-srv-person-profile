@@ -21,7 +21,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: "WHATS UP"
+                  value: "WHATS_UP"
         - insert:
             tableName: messenger
             columns:
