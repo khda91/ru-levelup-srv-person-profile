@@ -13,6 +13,7 @@ import ru.levelp.srv.person.profile.api.mapper.MessengerMapper;
 import ru.levelp.srv.person.profile.infrastructure.annotation.UnitTest;
 import ru.levelp.srv.person.profile.model.Messenger;
 import ru.levelp.srv.person.profile.repository.MessengerRepository;
+import ru.levelp.srv.person.profile.validation.messenger.MessengerValidationAggregator;
 
 import java.util.Collections;
 
@@ -28,6 +29,9 @@ class MessengerServiceTest {
 
     @Spy
     private final MessengerMapper messengerMapper = Mappers.getMapper(MessengerMapper.class);
+
+    @Mock
+    private MessengerValidationAggregator messengerValidationAggregator;
 
     @Mock
     private MessengerRepository messengerRepository;
