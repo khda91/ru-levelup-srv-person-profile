@@ -30,10 +30,12 @@ public class MessengerService {
                         .collect(Collectors.toList()));
     }
 
+    @Transactional
     public void removeMessenger(String messengerId) {
         messengerRepository.delete(messengerId);
     }
 
+    @Transactional
     public void createMessenger(String messengerId) {
         var messenger = messengerMapper.toMessenger(messengerId);
         messengerRepository.create(messenger);
