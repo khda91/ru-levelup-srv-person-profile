@@ -128,5 +128,4 @@ class MessengerRepositoryIT {
                 .as("Unable to count messengers")
                 .isEqualTo(2);
     }
-
 }
