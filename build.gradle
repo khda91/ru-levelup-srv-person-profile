@@ -24,6 +24,7 @@ dependencies {
         beanutilsVersion = '1.9.4'
         commonsCollectionsVersion = '4.4'
         commonsIoVersion = '2.11.0'
+        commonsLang3Version = '3.12.0'
         dbunitVersion = '2.7.3'
         gradleLiquibaseVersion = '2.1.1'
         jacksonVersion = '2.13.3'
@@ -72,6 +73,9 @@ dependencies {
 
     // apache commons collections
     implementation "org.apache.commons:commons-collections4:${commonsCollectionsVersion}"
+
+    // apache commons lang3
+    implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
 
     // jackson
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
@@ -161,6 +165,7 @@ jacocoTestReport {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     'ru/levelp/srv/person/profile/api/data/*',
+                    'ru/levelp/srv/person/profile/api/exception/*',
                     'ru/levelp/srv/person/profile/configuration/*/**',
                     'ru/levelp/srv/person/profile/model/*',
                     'ru/levelp/srv/person/profile/Application.*'

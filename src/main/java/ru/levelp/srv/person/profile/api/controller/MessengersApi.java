@@ -24,6 +24,7 @@ import ru.levelp.srv.person.profile.api.data.ProblemResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-05-20T20:35:45.386531+03:00[Europe/Moscow]")
@@ -53,7 +54,7 @@ public interface MessengersApi {
             value = "/messengers/{messengerId}",
             produces = {"application/problem+json"}
     )
-    ResponseEntity<Void> createMessenger(@Size(max = 255) @ApiParam(value = "Universally unique identifier of the messenger.", required = true) @PathVariable("messengerId") String messengerId);
+    ResponseEntity<Void> createMessenger(@Pattern(regexp = "([A-Z0-9_]*)") @Size(min = 2, max = 255) @ApiParam(value = "Universally unique identifier of the messenger.", required = true) @PathVariable("messengerId") String messengerId);
 
 
     /**

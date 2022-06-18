@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.levelp.srv.person.profile.api.data.MessengerListResponse;
 import ru.levelp.srv.person.profile.api.mapper.MessengerMapper;
 import ru.levelp.srv.person.profile.repository.MessengerRepository;
+import ru.levelp.srv.person.profile.validation.messenger.MessengerValidationAggregator;
 
 import java.util.stream.Collectors;
 
@@ -18,6 +19,8 @@ public class MessengerService {
     private final MessengerRepository messengerRepository;
 
     private final MessengerMapper messengerMapper;
+
+    private final MessengerValidationAggregator messengerValidationAggregator;
 
     @Transactional(readOnly = true)
     public MessengerListResponse getMessengers(Integer limit, Integer offset) {
@@ -37,7 +40,13 @@ public class MessengerService {
 
     @Transactional
     public void createMessenger(String messengerId) {
+        messengerValidationAggregator.validate(messengerId);
+
         var messenger = messengerMapper.toMessenger(messengerId);
         messengerRepository.create(messenger);
+    }
+
+    public boolean exists(String messengerId) {
+        return messengerRepository.get(messengerId).isPresent();
     }
 }
