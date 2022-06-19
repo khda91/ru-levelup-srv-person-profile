@@ -7,4 +7,5 @@ import lombok.NoArgsConstructor;
 public final class Endpoint {
 
     public static final String MESSENGER_PATH = "/messengers";
+    public static final String SOCIAL_NETWORK_PATH = "/social-networks";
 }
