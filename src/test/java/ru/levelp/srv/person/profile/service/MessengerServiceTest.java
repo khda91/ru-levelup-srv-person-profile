@@ -16,6 +16,7 @@ import ru.levelp.srv.person.profile.repository.MessengerRepository;
 import ru.levelp.srv.person.profile.validation.messenger.MessengerValidationAggregator;
 
 import java.util.Collections;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
@@ -109,5 +110,22 @@ class MessengerServiceTest {
 
         // then
         verify(messengerRepository, times(1)).delete(messengerId);
+    }
+
+    @Test
+    @DisplayName("messenger should exist")
+    void existTest() {
+        // given
+        final var messengerId = "MESSENGER";
+
+        when(messengerRepository.get(messengerId)).thenReturn(Optional.of(Messenger.builder().id(messengerId).build()));
+
+        // when
+        boolean exists = messengerService.exists(messengerId);
+
+        // then
+        assertThat(exists).isTrue();
+
+        verify(messengerRepository, times(1)).get(messengerId);
     }
 }
