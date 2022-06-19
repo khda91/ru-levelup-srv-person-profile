@@ -9,14 +9,14 @@ import java.util.Objects;
 
 @ApiModel(description = "Represents attributes required to add a social network with some predefined type to a person.")
 public class CreatePersonSocialNetworkData {
-    @JsonProperty("messengerId")
-    private String messengerId;
+    @JsonProperty("socialNetworkId")
+    private String socialNetworkId;
 
     @JsonProperty("link")
     private String link;
 
     public CreatePersonSocialNetworkData messengerId(String messengerId) {
-        this.messengerId = messengerId;
+        this.socialNetworkId = messengerId;
         return this;
     }
 
@@ -28,12 +28,12 @@ public class CreatePersonSocialNetworkData {
     @ApiModelProperty(example = "LINKED_IN", value = "Universally unique and immutable identifier of the social network.")
 
     @Size(max = 255)
-    public String getMessengerId() {
-        return messengerId;
+    public String getSocialNetworkId() {
+        return socialNetworkId;
     }
 
-    public void setMessengerId(String messengerId) {
-        this.messengerId = messengerId;
+    public void setSocialNetworkId(String socialNetworkId) {
+        this.socialNetworkId = socialNetworkId;
     }
 
     public CreatePersonSocialNetworkData link(String link) {
@@ -67,13 +67,13 @@ public class CreatePersonSocialNetworkData {
             return false;
         }
         CreatePersonSocialNetworkData createPersonSocialNetworkData = (CreatePersonSocialNetworkData) o;
-        return Objects.equals(this.messengerId, createPersonSocialNetworkData.messengerId) &&
+        return Objects.equals(this.socialNetworkId, createPersonSocialNetworkData.socialNetworkId) &&
                 Objects.equals(this.link, createPersonSocialNetworkData.link);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messengerId, link);
+        return Objects.hash(socialNetworkId, link);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class CreatePersonSocialNetworkData {
         StringBuilder sb = new StringBuilder();
         sb.append("class CreatePersonSocialNetworkData {\n");
 
-        sb.append("    messengerId: ").append(toIndentedString(messengerId)).append("\n");
+        sb.append("    messengerId: ").append(toIndentedString(socialNetworkId)).append("\n");
         sb.append("    link: ").append(toIndentedString(link)).append("\n");
         sb.append("}");
         return sb.toString();

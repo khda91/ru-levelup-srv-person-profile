@@ -13,6 +13,28 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface PersonMapper extends UuidToStringMappingStrategy {
 
+    @Mappings({
+            @Mapping(target = "email", source = "email"),
+            @Mapping(target = "role", source = "role"),
+            @Mapping(target = "firstName", source = "identity.firstName"),
+            @Mapping(target = "lastName", source = "identity.lastName"),
+            @Mapping(target = "middleName", source = "identity.middleName"),
+            @Mapping(target = "gender", source = "identity.gender"),
+            @Mapping(target = "dateOfBirth", source = "identity.dateOfBirth"),
+            @Mapping(target = "placeOfBirth", source = "identity.placeOfBirth"),
+            @Mapping(target = "passportSeries", source = "identity.passport.series"),
+            @Mapping(target = "passportNumber", source = "identity.passport.number"),
+            @Mapping(target = "placeOfIssue", source = "identity.passport.placeOfIssue"),
+            @Mapping(target = "dateOfIssue", source = "identity.passport.dateOfIssue"),
+            @Mapping(target = "departmentCode", source = "identity.passport.departmentCode"),
+            @Mapping(target = "street", source = "address.street"),
+            @Mapping(target = "houseNumber", source = "address.houseNumber"),
+            @Mapping(target = "houseBuilding", source = "address.houseBuilding"),
+            @Mapping(target = "houseLetter", source = "address.houseLetter"),
+            @Mapping(target = "flat", source = "address.flat"),
+            @Mapping(target = "city", source = "address.city"),
+            @Mapping(target = "postalCode", source = "address.postalCode")
+    })
     Person toPerson(CreatePersonData createPersonData);
 
     @Mappings({

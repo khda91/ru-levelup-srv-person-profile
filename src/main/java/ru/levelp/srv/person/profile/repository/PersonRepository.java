@@ -12,7 +12,9 @@ public interface PersonRepository {
 
     Person save(Person person);
 
-    List<Person> getAll(Integer limit, Integer offset);
+    List<Person> getAll(String email, List<String> roles, Integer limit, Integer offset);
 
     Integer getTotalPeopleCount();
+
+    Optional<Person> getByEmail(String email);
 }
