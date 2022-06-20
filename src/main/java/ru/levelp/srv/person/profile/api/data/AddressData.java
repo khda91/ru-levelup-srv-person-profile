@@ -7,6 +7,9 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+/**
+ * Represents a person&#39;s address.
+ */
 @ApiModel(description = "Represents a person's address.")
 public class AddressData {
     @JsonProperty("street")

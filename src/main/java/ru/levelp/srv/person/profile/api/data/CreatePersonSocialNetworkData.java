@@ -4,9 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+/**
+ * Represents attributes required to add a social network with some predefined type to a person.
+ */
 @ApiModel(description = "Represents attributes required to add a social network with some predefined type to a person.")
 public class CreatePersonSocialNetworkData {
     @JsonProperty("socialNetworkId")
@@ -15,19 +19,20 @@ public class CreatePersonSocialNetworkData {
     @JsonProperty("link")
     private String link;
 
-    public CreatePersonSocialNetworkData messengerId(String messengerId) {
-        this.socialNetworkId = messengerId;
+    public CreatePersonSocialNetworkData socialNetworkId(String socialNetworkId) {
+        this.socialNetworkId = socialNetworkId;
         return this;
     }
 
     /**
      * Universally unique and immutable identifier of the social network.
      *
-     * @return messengerId
+     * @return socialNetworkId
      */
     @ApiModelProperty(example = "LINKED_IN", value = "Universally unique and immutable identifier of the social network.")
 
-    @Size(max = 255)
+    @Pattern(regexp = "([A-Z0-9_]*)")
+    @Size(min = 2, max = 255)
     public String getSocialNetworkId() {
         return socialNetworkId;
     }
@@ -81,7 +86,7 @@ public class CreatePersonSocialNetworkData {
         StringBuilder sb = new StringBuilder();
         sb.append("class CreatePersonSocialNetworkData {\n");
 
-        sb.append("    messengerId: ").append(toIndentedString(socialNetworkId)).append("\n");
+        sb.append("    socialNetworkId: ").append(toIndentedString(socialNetworkId)).append("\n");
         sb.append("    link: ").append(toIndentedString(link)).append("\n");
         sb.append("}");
         return sb.toString();

@@ -3,7 +3,9 @@ package ru.levelp.srv.person.profile.api.data;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-
+/**
+ * The role of the person in the LevelUp Trainig Center
+ */
 public enum PersonRole {
 
     STUDENT("STUDENT"),

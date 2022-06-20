@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import ru.levelp.srv.person.profile.api.data.CreatePersonSocialNetworkData;
+import ru.levelp.srv.person.profile.api.data.PersonSocialNetworkData;
 import ru.levelp.srv.person.profile.api.data.PersonSocialNetworkListResponse;
 import ru.levelp.srv.person.profile.model.PersonSocialNetwork;
 

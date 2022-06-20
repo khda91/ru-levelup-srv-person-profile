@@ -8,6 +8,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+/**
+ * Response containing a person profile.
+ */
 @ApiModel(description = "Response containing a person profile.")
 public class PersonResponse {
     @JsonProperty("data")

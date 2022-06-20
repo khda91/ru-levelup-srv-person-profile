@@ -7,6 +7,9 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.Min;
 import java.util.Objects;
 
+/**
+ * Describes the pagination information for the provided results.
+ */
 @ApiModel(description = "Describes the pagination information for the provided results.")
 public class PaginationData {
     @JsonProperty("limit")

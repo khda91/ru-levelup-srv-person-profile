@@ -8,6 +8,9 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+/**
+ * Represents a social networks of a person.
+ */
 @ApiModel(description = "Represents a social networks of a person.")
 public class PersonSocialNetworkData {
     @JsonProperty("id")
@@ -76,7 +79,8 @@ public class PersonSocialNetworkData {
      */
     @ApiModelProperty(example = "LINKED_IN", value = "Universally unique and immutable identifier of the social network.")
 
-    @Size(max = 255)
+    @Pattern(regexp = "([A-Z0-9_]*)")
+    @Size(min = 2, max = 255)
     public String getSocialNetworkId() {
         return socialNetworkId;
     }

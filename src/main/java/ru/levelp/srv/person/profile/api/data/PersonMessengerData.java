@@ -8,6 +8,9 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+/**
+ * Represents a messengers of a person.
+ */
 @ApiModel(description = "Represents a messengers of a person.")
 public class PersonMessengerData {
     @JsonProperty("id")
@@ -64,19 +67,20 @@ public class PersonMessengerData {
         this.personId = personId;
     }
 
-    public PersonMessengerData socialNetworkId(String socialNetworkId) {
-        this.messengerId = socialNetworkId;
+    public PersonMessengerData messengerId(String messengerId) {
+        this.messengerId = messengerId;
         return this;
     }
 
     /**
      * Universally unique and immutable identifier of the messenger.
      *
-     * @return socialNetworkId
+     * @return messengerId
      */
     @ApiModelProperty(example = "TELEGRAM", value = "Universally unique and immutable identifier of the messenger.")
 
-    @Size(max = 255)
+    @Pattern(regexp = "([A-Z0-9_]*)")
+    @Size(min = 2, max = 255)
     public String getMessengerId() {
         return messengerId;
     }
@@ -85,15 +89,15 @@ public class PersonMessengerData {
         this.messengerId = messengerId;
     }
 
-    public PersonMessengerData link(String link) {
-        this.nickname = link;
+    public PersonMessengerData nickname(String nickname) {
+        this.nickname = nickname;
         return this;
     }
 
     /**
      * Link to the person's profile in messenger
      *
-     * @return link
+     * @return nickname
      */
     @ApiModelProperty(example = "@VasilyPupkin", value = "Link to the person's profile in messenger")
 
@@ -134,8 +138,8 @@ public class PersonMessengerData {
 
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    personId: ").append(toIndentedString(personId)).append("\n");
-        sb.append("    socialNetworkId: ").append(toIndentedString(messengerId)).append("\n");
-        sb.append("    link: ").append(toIndentedString(nickname)).append("\n");
+        sb.append("    messengerId: ").append(toIndentedString(messengerId)).append("\n");
+        sb.append("    nickname: ").append(toIndentedString(nickname)).append("\n");
         sb.append("}");
         return sb.toString();
     }

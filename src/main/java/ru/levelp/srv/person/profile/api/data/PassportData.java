@@ -5,17 +5,21 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Represents a person&#39;s passport data
+ */
 @ApiModel(description = "Represents a person's passport data")
 public class PassportData {
     @JsonProperty("series")
-    private Integer series;
+    private String series;
 
     @JsonProperty("number")
-    private Integer number;
+    private String number;
 
     @JsonProperty("placeOfIssue")
     private String placeOfIssue;
@@ -27,45 +31,47 @@ public class PassportData {
     @JsonProperty("departmentCode")
     private String departmentCode;
 
-    public PassportData series(Integer series) {
+    public PassportData series(String series) {
         this.series = series;
         return this;
     }
 
     /**
-     * Series of person's pasport.
+     * Series of person's passport.
      *
      * @return series
      */
-    @ApiModelProperty(example = "1234", value = "Series of person's pasport.")
+    @ApiModelProperty(example = "1234", value = "Series of person's passport.")
 
+    @Pattern(regexp = "\\d{4}")
     @Size(min = 4, max = 4)
-    public Integer getSeries() {
+    public String getSeries() {
         return series;
     }
 
-    public void setSeries(Integer series) {
+    public void setSeries(String series) {
         this.series = series;
     }
 
-    public PassportData number(Integer number) {
+    public PassportData number(String number) {
         this.number = number;
         return this;
     }
 
     /**
-     * Number of person's pasport.
+     * Number of person's passport.
      *
      * @return number
      */
-    @ApiModelProperty(example = "123456", value = "Number of person's pasport.")
+    @ApiModelProperty(example = "123456", value = "Number of person's passport.")
 
+    @Pattern(regexp = "\\d{6}")
     @Size(min = 6, max = 6)
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
@@ -75,11 +81,11 @@ public class PassportData {
     }
 
     /**
-     * Place where person recieved passport.
+     * Place where person received passport.
      *
      * @return placeOfIssue
      */
-    @ApiModelProperty(example = "", value = "Place where person recieved passport.")
+    @ApiModelProperty(example = "", value = "Place where person received passport.")
 
     @Size(max = 255)
     public String getPlaceOfIssue() {
@@ -96,11 +102,11 @@ public class PassportData {
     }
 
     /**
-     * Date when a person recieved passport.
+     * Date when a person received passport.
      *
      * @return dateOfIssue
      */
-    @ApiModelProperty(example = "Thu Feb 07 03:00:00 MSK 1980", value = "Date when a person recieved passport.")
+    @ApiModelProperty(example = "Thu Feb 07 03:00:00 MSK 1980", value = "Date when a person received passport.")
 
     @Valid
 
@@ -118,12 +124,13 @@ public class PassportData {
     }
 
     /**
-     * Department code where person recieved passport.
+     * Department code where person received passport.
      *
      * @return departmentCode
      */
-    @ApiModelProperty(example = "123-456", value = "Department code where person recieved passport.")
+    @ApiModelProperty(example = "123-456", value = "Department code where person received passport.")
 
+    @Pattern(regexp = "(\\d{3}-\\d{3})")
     @Size(min = 7, max = 7)
     public String getDepartmentCode() {
         return departmentCode;

@@ -8,7 +8,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-@ApiModel(description = "Metainformation for the provided results.")
+/**
+ * Meta information for the provided results.
+ */
+@ApiModel(description = "Meta information for the provided results.")
 public class PersonListResponseMeta {
     @JsonProperty("pagination")
     private PaginationData pagination;
