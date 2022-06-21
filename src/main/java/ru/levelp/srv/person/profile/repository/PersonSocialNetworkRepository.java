@@ -16,5 +16,5 @@ public interface PersonSocialNetworkRepository {
 
     Optional<PersonSocialNetwork> getPersonSocialNetwork(String personId, String socialNetworkId);
 
-    void delete(UUID socialNetworkId);
+    void delete(UUID id);
 }

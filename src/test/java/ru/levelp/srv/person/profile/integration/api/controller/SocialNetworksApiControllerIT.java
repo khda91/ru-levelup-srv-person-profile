@@ -21,7 +21,7 @@ import java.util.List;
 class SocialNetworksApiControllerIT extends AbstractController {
 
     private static final List<SocialNetworkData> EXPECTED_SOCIAL_NETWORKS = List
-            .of(new SocialNetworkData().id("VK"), new SocialNetworkData().id("FACEBOOK"));
+            .of(new SocialNetworkData().id("VK"), new SocialNetworkData().id("FACEBOOK"), new SocialNetworkData().id("LINKED_IN"));
 
     @Test
     @DisplayName("should return all social networks")
@@ -39,8 +39,8 @@ class SocialNetworksApiControllerIT extends AbstractController {
         // then
         SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-            softly.assertThat(objectResponse.getData()).hasSize(2);
-            softly.assertThat(objectResponse.getMeta().getPagination().getTotalCount()).isEqualTo(2);
+            softly.assertThat(objectResponse.getData()).hasSameSizeAs(EXPECTED_SOCIAL_NETWORKS);
+            softly.assertThat(objectResponse.getMeta().getPagination().getTotalCount()).isEqualTo(3);
             softly.assertThat(objectResponse.getMeta().getPagination().getLimit()).isEqualTo(10);
             softly.assertThat(objectResponse.getMeta().getPagination().getOffset()).isEqualTo(0);
 
@@ -54,7 +54,7 @@ class SocialNetworksApiControllerIT extends AbstractController {
     @SneakyThrows
     void createSocialNetworkTest() {
         // given
-        var request = preparePutJsonContentRequest(Endpoint.SOCIAL_NETWORK_PATH + "/WHATS_UP", null);
+        var request = preparePutJsonContentRequest(Endpoint.SOCIAL_NETWORK_PATH + "/ODNOCLASSNIKI", null);
 
         // when-then
         mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isNoContent());
@@ -66,7 +66,7 @@ class SocialNetworksApiControllerIT extends AbstractController {
     @SneakyThrows
     void deleteSocialNetworkTest() {
         // given
-        var request = prepareDeleteJsonContentRequest(Endpoint.SOCIAL_NETWORK_PATH + "/VIBER");
+        var request = prepareDeleteJsonContentRequest(Endpoint.SOCIAL_NETWORK_PATH + "/FACEBOOK");
 
         // when-then
         mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isNoContent());

@@ -8,7 +8,7 @@ import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.lang3.StringUtils;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class ObjectFieldUtils {
+public final class ObjectFieldsUtils {
 
     public static String getFullPropertyPath(Object object, String field, boolean includeClassName) {
         return getFullPropertyPath(object, null, field, includeClassName);

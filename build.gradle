@@ -167,7 +167,9 @@ jacocoTestReport {
                     'ru/levelp/srv/person/profile/api/data/*',
                     'ru/levelp/srv/person/profile/api/exception/*',
                     'ru/levelp/srv/person/profile/configuration/*/**',
+                    'ru/levelp/srv/person/profile/exception/*',
                     'ru/levelp/srv/person/profile/model/*',
+                    'ru/levelp/srv/person/profile/validation/data/*',
                     'ru/levelp/srv/person/profile/Application.*'
             ])
         }))

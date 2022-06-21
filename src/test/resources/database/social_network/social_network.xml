@@ -2,4 +2,5 @@
 <dataset>
     <social_network id="VK"/>
     <social_network id="FACEBOOK"/>
+    <social_network id="LINKED_IN"/>
 </dataset>

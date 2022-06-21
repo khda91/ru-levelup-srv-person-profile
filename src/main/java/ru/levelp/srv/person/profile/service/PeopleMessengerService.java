@@ -11,6 +11,7 @@ import ru.levelp.srv.person.profile.api.mapper.PersonMessengerMapper;
 import ru.levelp.srv.person.profile.exception.EntityNotFoundProblemException;
 import ru.levelp.srv.person.profile.model.PersonMessenger;
 import ru.levelp.srv.person.profile.repository.PersonMessengerRepository;
+import ru.levelp.srv.person.profile.validation.person.PersonMessengerValidationAggregator;
 
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,12 @@ public class PeopleMessengerService {
 
     private final PersonMessengerMapper personMessengerMapper;
 
+    private final PersonMessengerValidationAggregator messengerValidationAggregator;
+
     @Transactional
     public void addMessenger(String personId, CreatePersonMessengerData body) {
+        messengerValidationAggregator.validate(body, personId);
+
         peopleService.get(personId);
         UUID uuid = UUID.randomUUID();
 
@@ -54,5 +59,10 @@ public class PeopleMessengerService {
                 .orElseThrow(() -> new EntityNotFoundProblemException(PersonMessenger.class, Map.of("personId", personId, "messengerId", messengerId)));
         var personMessengerId = personMessenger.getId();
         personMessengerRepository.delete(personMessengerId);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean exist(String personId, String messengerId) {
+        return personMessengerRepository.getPersonMessenger(personId, messengerId).isPresent();
     }
 }

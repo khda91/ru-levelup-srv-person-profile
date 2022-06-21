@@ -7,7 +7,7 @@ import ru.levelp.srv.person.profile.api.data.CreatePersonData;
 import ru.levelp.srv.person.profile.api.data.violation.FieldNotUniqueViolation;
 import ru.levelp.srv.person.profile.api.data.violation.Violation;
 import ru.levelp.srv.person.profile.service.PeopleService;
-import ru.levelp.srv.person.profile.utils.ObjectFieldUtils;
+import ru.levelp.srv.person.profile.utils.ObjectFieldsUtils;
 
 import java.util.Optional;
 
@@ -20,7 +20,7 @@ public class PersonEmailValidator implements CreatePersonValidator, EmailValidat
 
     @Override
     public Optional<Violation> validate(CreatePersonData createPersonData) {
-        var emailPath = ObjectFieldUtils.getFullPropertyPath(createPersonData, "email", false);
+        var emailPath = ObjectFieldsUtils.getFullPropertyPath(createPersonData, "email", false);
         var email = createPersonData.getEmail();
         var emailValidationData = defaultEmailValidate(email, CreatePersonData.class, emailPath);
 

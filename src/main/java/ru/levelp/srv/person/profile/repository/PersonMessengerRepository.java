@@ -16,5 +16,5 @@ public interface PersonMessengerRepository {
 
     Optional<PersonMessenger> getPersonMessenger(String personId, String messengerId);
 
-    void delete(UUID messengerId);
+    void delete(UUID id);
 }

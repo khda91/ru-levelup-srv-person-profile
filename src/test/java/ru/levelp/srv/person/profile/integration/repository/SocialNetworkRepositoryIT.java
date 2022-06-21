@@ -21,6 +21,7 @@ class SocialNetworkRepositoryIT {
 
     private static final String VK = "VK";
     private static final String FACEBOOK = "FACEBOOK";
+    private static final String LINKED_ID = "LINKED_IN";
     private static final String NOT_EXISTING_SOCIAL_NETWORK = "NOT_EXISTING_SOCIAL_NETWORK";
     private static final String NEW_SOCIAL_NETWORK_ID = "NEW_SOCIAL_NETWORK";
     private static final SocialNetwork NEW_SOCIAL_NETWORK = SocialNetwork.builder().id(NEW_SOCIAL_NETWORK_ID).build();
@@ -111,9 +112,9 @@ class SocialNetworkRepositoryIT {
         assertThat(socialNetworks)
                 .as("Social networks were not found")
                 .isNotNull()
-                .hasSize(2)
+                .hasSize(3)
                 .containsExactlyInAnyOrder(SocialNetwork.builder().id(VK).build(),
-                        SocialNetwork.builder().id(FACEBOOK).build());
+                        SocialNetwork.builder().id(FACEBOOK).build(),SocialNetwork.builder().id(LINKED_ID).build());
     }
 
     @Test
@@ -126,6 +127,6 @@ class SocialNetworkRepositoryIT {
         // then
         assertThat(count)
                 .as("Unable to count social networks")
-                .isEqualTo(2);
+                .isEqualTo(3);
     }
 }

@@ -18,7 +18,6 @@ public interface PersonMessengerMapper extends UuidToStringMappingStrategy {
     PersonMessenger toPersonMessenger(CreatePersonMessengerData createPersonMessengerData);
 
     @Mappings({
-            @Mapping(source = "personId", target = "personId"),
             @Mapping(source = "createPersonMessengerData.messengerId", target = "messengerId"),
             @Mapping(source = "createPersonMessengerData.nickname", target = "nickname")
     })

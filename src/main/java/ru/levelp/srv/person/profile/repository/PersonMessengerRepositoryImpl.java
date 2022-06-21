@@ -95,7 +95,7 @@ public class PersonMessengerRepositoryImpl implements PersonMessengerRepository 
     }
 
     @Override
-    public void delete(UUID messengerId) {
-        personMessengerCrud.delete(messengerId);
+    public void delete(UUID id) {
+        personMessengerCrud.delete(id);
     }
 }

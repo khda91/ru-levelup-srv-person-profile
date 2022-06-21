@@ -13,12 +13,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface PersonSocialNetworkMapper extends UuidToStringMappingStrategy {
 
-    PersonSocialNetwork toPersonSocialNetwork(PersonSocialNetwork personSocialNetwork);
+    PersonSocialNetworkData toPersonSocialNetworkData(PersonSocialNetwork personSocialNetwork);
 
     PersonSocialNetwork toPersonSocialNetwork(CreatePersonSocialNetworkData createPersonSocialNetworkData);
 
     @Mappings({
-            @Mapping(source = "personId", target = "personId"),
             @Mapping(source = "createPersonSocialNetworkData.socialNetworkId", target = "socialNetworkId"),
             @Mapping(source = "createPersonSocialNetworkData.link", target = "link")
     })

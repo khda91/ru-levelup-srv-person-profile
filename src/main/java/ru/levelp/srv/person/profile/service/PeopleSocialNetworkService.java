@@ -11,6 +11,7 @@ import ru.levelp.srv.person.profile.api.mapper.PersonSocialNetworkMapper;
 import ru.levelp.srv.person.profile.exception.EntityNotFoundProblemException;
 import ru.levelp.srv.person.profile.model.PersonSocialNetwork;
 import ru.levelp.srv.person.profile.repository.PersonSocialNetworkRepository;
+import ru.levelp.srv.person.profile.validation.person.PersonSocialNetworkValidationAggregator;
 
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,12 @@ public class PeopleSocialNetworkService {
 
     private final PersonSocialNetworkMapper personSocialNetworkMapper;
 
+    private final PersonSocialNetworkValidationAggregator socialNetworkValidationAggregator;
+
     @Transactional
     public void addSocialNetwork(String personId, CreatePersonSocialNetworkData body) {
+        socialNetworkValidationAggregator.validate(body, personId);
+
         peopleService.get(personId);
         UUID uuid = UUID.randomUUID();
 
@@ -54,5 +59,10 @@ public class PeopleSocialNetworkService {
                 .orElseThrow(() -> new EntityNotFoundProblemException(PersonSocialNetwork.class, Map.of("personId", personId, "socialNetworkId", socialNetworkId)));
         var personSocialNetworkId = personSocialNetwork.getId();
         personSocialNetworkRepository.delete(personSocialNetworkId);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean exist(String personId, String socialNetworkId) {
+        return personSocialNetworkRepository.getPersonSocialNetwork(personId, socialNetworkId).isPresent();
     }
 }

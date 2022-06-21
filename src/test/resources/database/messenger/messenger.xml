@@ -2,4 +2,5 @@
 <dataset>
     <messenger id="VIBER"/>
     <messenger id="TELEGRAM"/>
+    <messenger id="WHATS_UP"/>
 </dataset>

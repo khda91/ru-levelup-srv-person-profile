@@ -95,7 +95,7 @@ public class PersonSocialNetworkRepositoryImpl implements PersonSocialNetworkRep
     }
 
     @Override
-    public void delete(UUID socialNetworkId) {
-        personSocialNetworkCrud.delete(socialNetworkId);
+    public void delete(UUID id) {
+        personSocialNetworkCrud.delete(id);
     }
 }
