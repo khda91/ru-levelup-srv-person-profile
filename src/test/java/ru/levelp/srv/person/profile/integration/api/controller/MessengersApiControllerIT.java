@@ -21,7 +21,7 @@ import java.util.List;
 class MessengersApiControllerIT extends AbstractController {
 
     private static final List<MessengerData> EXPECTED_MESSENGERS = List
-            .of(new MessengerData().id("VIBER"), new MessengerData().id("TELEGRAM"));
+            .of(new MessengerData().id("VIBER"), new MessengerData().id("TELEGRAM"), new MessengerData().id("WHATS_UP"));
 
     @Test
     @DisplayName("should return all messengers")
@@ -39,8 +39,8 @@ class MessengersApiControllerIT extends AbstractController {
         // then
         SoftAssertions.assertSoftly(softly -> {
             softly.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-            softly.assertThat(objectResponse.getData()).hasSize(2);
-            softly.assertThat(objectResponse.getMeta().getPagination().getTotalCount()).isEqualTo(2);
+            softly.assertThat(objectResponse.getData()).hasSize(EXPECTED_MESSENGERS.size());
+            softly.assertThat(objectResponse.getMeta().getPagination().getTotalCount()).isEqualTo(EXPECTED_MESSENGERS.size());
             softly.assertThat(objectResponse.getMeta().getPagination().getLimit()).isEqualTo(10);
             softly.assertThat(objectResponse.getMeta().getPagination().getOffset()).isEqualTo(0);
 
@@ -54,7 +54,7 @@ class MessengersApiControllerIT extends AbstractController {
     @SneakyThrows
     void createMessengerTest() {
         // given
-        var request = preparePutJsonContentRequest(Endpoint.MESSENGER_PATH + "/WHATS_UP", null);
+        var request = preparePutJsonContentRequest(Endpoint.MESSENGER_PATH + "/ICQ", null);
 
         // when-then
         mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isNoContent());

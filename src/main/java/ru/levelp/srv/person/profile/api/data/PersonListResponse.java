@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Response containing a list of person profiles.
+ */
 @ApiModel(description = "Response containing a list of person profiles.")
 public class PersonListResponse {
     @JsonProperty("data")

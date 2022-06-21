@@ -36,7 +36,7 @@ public class Person {
     private String houseLetter;
     private Integer flat;
     private String city;
-    private Integer postalCode;
+    private String postalCode;
 
     public enum Role {
         STUDENT,

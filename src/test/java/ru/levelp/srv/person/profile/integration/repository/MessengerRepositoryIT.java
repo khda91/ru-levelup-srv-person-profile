@@ -21,6 +21,7 @@ class MessengerRepositoryIT {
 
     private static final String TELEGRAM = "TELEGRAM";
     private static final String VIBER = "VIBER";
+    private static final String WHATS_UP = "WHATS_UP";
     private static final String NOT_EXISTING_MESSENGER = "NOT_EXISTING_MESSENGER";
     private static final String NEW_MESSENGER_ID = "NEW_MESSENGER";
     private static final Messenger NEW_MESSENGER = Messenger.builder().id(NEW_MESSENGER_ID).build();
@@ -111,9 +112,9 @@ class MessengerRepositoryIT {
         assertThat(messengers)
                 .as("Messengers were not found")
                 .isNotNull()
-                .hasSize(2)
+                .hasSize(3)
                 .containsExactlyInAnyOrder(Messenger.builder().id(TELEGRAM).build(),
-                        Messenger.builder().id(VIBER).build());
+                        Messenger.builder().id(VIBER).build(), Messenger.builder().id(WHATS_UP).build());
     }
 
     @Test
@@ -126,6 +127,6 @@ class MessengerRepositoryIT {
         // then
         assertThat(count)
                 .as("Unable to count messengers")
-                .isEqualTo(2);
+                .isEqualTo(3);
     }
 }

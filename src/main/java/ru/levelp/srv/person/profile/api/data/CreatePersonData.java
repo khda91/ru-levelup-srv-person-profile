@@ -9,6 +9,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+/**
+ * Represents attributes required to create a new person record.
+ */
 @ApiModel(description = "Represents attributes required to create a new person record.")
 public class CreatePersonData {
     @JsonProperty("role")

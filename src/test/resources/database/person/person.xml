@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <person id="ec9655d2-e35d-4f45-be81-7ed4abc7cd14"
+            email="i.ivanov@mail.com"
+            role="STUDENT"
+            phone_number="89999999999"
+            />
+</dataset>

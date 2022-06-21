@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <person_messenger id="7fa4fc70-f6fd-4dc6-9379-1e2fa3130c0d"
+                      person_id="ec9655d2-e35d-4f45-be81-7ed4abc7cd14"
+                      messenger_id="VIBER"
+                      nickname="ivan_ivanov"/>
+    <person_messenger id="9f0ca8c5-36f0-496c-a05e-df73ce31290a"
+                      person_id="ec9655d2-e35d-4f45-be81-7ed4abc7cd14"
+                      messenger_id="TELEGRAM"
+                      nickname="@ivanovi"/>
+</dataset>

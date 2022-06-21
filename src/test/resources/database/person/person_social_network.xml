@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <person_social_network id="48573702-a147-43ad-8ebd-05e103a2397a"
+                      person_id="ec9655d2-e35d-4f45-be81-7ed4abc7cd14"
+                      social_network_id="VK"
+                      link="https://vk.com/id123456"/>
+    <person_social_network id="e10ee189-019c-4fa4-a32d-7c47b17f21d3"
+                      person_id="ec9655d2-e35d-4f45-be81-7ed4abc7cd14"
+                      social_network_id="FACEBOOK"
+                      link="https://facebook.com/person/ivanov_ivan"/>
+</dataset>

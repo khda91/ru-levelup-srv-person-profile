@@ -5,9 +5,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+/**
+ * Representing a unique social network
+ */
 @ApiModel(description = "Representing a unique social network")
 public class SocialNetworkData {
     @JsonProperty("id")
@@ -26,7 +30,8 @@ public class SocialNetworkData {
     @ApiModelProperty(example = "LINKED_IN", required = true, value = "Universally unique and immutable identifier of the social network.")
     @NotNull
 
-    @Size(max = 255)
+    @Pattern(regexp = "([A-Z0-9_]*)")
+    @Size(min = 2, max = 255)
     public String getId() {
         return id;
     }

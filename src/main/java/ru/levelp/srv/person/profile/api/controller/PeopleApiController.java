@@ -1,6 +1,7 @@
 package ru.levelp.srv.person.profile.api.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,9 @@ import ru.levelp.srv.person.profile.api.data.PersonMessengerListResponse;
 import ru.levelp.srv.person.profile.api.data.PersonResponse;
 import ru.levelp.srv.person.profile.api.data.PersonRole;
 import ru.levelp.srv.person.profile.api.data.PersonSocialNetworkListResponse;
+import ru.levelp.srv.person.profile.service.PeopleMessengerService;
 import ru.levelp.srv.person.profile.service.PeopleService;
+import ru.levelp.srv.person.profile.service.PeopleSocialNetworkService;
 
 import java.util.List;
 
@@ -23,19 +26,25 @@ public class PeopleApiController implements PeopleApi {
 
     private final PeopleService peopleService;
 
+    private final PeopleMessengerService peopleMessengerService;
+
+    private final PeopleSocialNetworkService peopleSocialNetworkService;
+
     @Override
     public ResponseEntity<Void> addMessengerToPerson(String personId, CreatePersonMessengerData createPersonMessengerData) {
-        return null;
+        peopleMessengerService.addMessenger(personId, createPersonMessengerData);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<Void> addSocialNetworkToPerson(String personId, CreatePersonSocialNetworkData createPersonSocialNetworkData) {
-        return null;
+        peopleSocialNetworkService.addSocialNetwork(personId, createPersonSocialNetworkData);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<PersonResponse> createPerson(CreatePersonData createPersonData) {
-        return null;
+        return new ResponseEntity<>((new PersonResponse().data(peopleService.create(createPersonData))), HttpStatus.CREATED);
     }
 
     @Override
@@ -45,26 +54,28 @@ public class PeopleApiController implements PeopleApi {
 
     @Override
     public ResponseEntity<PersonResponse> getPerson(String personId) {
-        return null;
+        return ResponseEntity.ok(new PersonResponse().data(peopleService.getPersonData(personId)));
     }
 
     @Override
     public ResponseEntity<PersonMessengerListResponse> getPersonMessengers(String personId, Integer limit, Integer offset, List<String> messenger) {
-        return null;
+        return ResponseEntity.ok(peopleMessengerService.getAll(personId, limit, offset, messenger));
     }
 
     @Override
     public ResponseEntity<PersonSocialNetworkListResponse> getPersonSocialNetworks(String personId, Integer limit, Integer offset, List<String> socialNetwork) {
-        return null;
+        return ResponseEntity.ok(peopleSocialNetworkService.getAll(personId, limit, offset, socialNetwork));
     }
 
     @Override
     public ResponseEntity<Void> removeMessengerFromPerson(String personId, String messengerId) {
-        return null;
+        peopleMessengerService.removeMessenger(personId, messengerId);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
     public ResponseEntity<Void> removeSocialNetworkFromPerson(String personId, String socialNetworkId) {
-        return null;
+        peopleSocialNetworkService.removeSocialNetwork(personId, socialNetworkId);
+        return ResponseEntity.noContent().build();
     }
 }

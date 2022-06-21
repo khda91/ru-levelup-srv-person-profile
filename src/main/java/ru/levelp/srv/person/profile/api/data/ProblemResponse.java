@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Problem details serialized according to RFC 7807.
+ */
 @ApiModel(description = "Problem details serialized according to RFC 7807.")
 public class ProblemResponse {
     @JsonProperty("type")

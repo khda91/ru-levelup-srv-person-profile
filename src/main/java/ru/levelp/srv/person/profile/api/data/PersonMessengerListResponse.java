@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Response containing a list of person messengers.
+ */
 @ApiModel(description = "Response containing a list of person messengers.")
 public class PersonMessengerListResponse {
     @JsonProperty("data")
@@ -17,7 +20,7 @@ public class PersonMessengerListResponse {
     private List<PersonMessengerData> data = new ArrayList<>();
 
     @JsonProperty("meta")
-    private PersonMessengerListResponseMeta meta;
+    private PersonListResponseMeta meta;
 
     public PersonMessengerListResponse data(List<PersonMessengerData> data) {
         this.data = data;
@@ -47,7 +50,7 @@ public class PersonMessengerListResponse {
         this.data = data;
     }
 
-    public PersonMessengerListResponse meta(PersonMessengerListResponseMeta meta) {
+    public PersonMessengerListResponse meta(PersonListResponseMeta meta) {
         this.meta = meta;
         return this;
     }
@@ -62,11 +65,11 @@ public class PersonMessengerListResponse {
 
     @Valid
 
-    public PersonMessengerListResponseMeta getMeta() {
+    public PersonListResponseMeta getMeta() {
         return meta;
     }
 
-    public void setMeta(PersonMessengerListResponseMeta meta) {
+    public void setMeta(PersonListResponseMeta meta) {
         this.meta = meta;
     }
 

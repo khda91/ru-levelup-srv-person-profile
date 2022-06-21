@@ -9,6 +9,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+/**
+ * Represents the main set of a person&#39;s attributes.
+ */
 @ApiModel(description = "Represents the main set of a person's attributes.")
 public class PersonData {
     @JsonProperty("id")

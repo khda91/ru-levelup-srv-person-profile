@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+/**
+ * Results of a validation constraint violation produced by some request.
+ */
 @ApiModel(description = "Results of a validation constraint violation produced by some request.")
 public class ViolationData {
     @JsonProperty("code")

@@ -78,4 +78,4 @@ databaseChangeLog:
                   type: varchar(255)
               - column:
                   name: postal_code
-                  type: number(6)
+                  type: varchar(6)

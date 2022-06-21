@@ -8,6 +8,9 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
+/**
+ * Represents a messengers of a person.
+ */
 @ApiModel(description = "Represents a messengers of a person.")
 public class PersonMessengerData {
     @JsonProperty("id")
@@ -16,11 +19,11 @@ public class PersonMessengerData {
     @JsonProperty("personId")
     private String personId;
 
-    @JsonProperty("socialNetworkId")
-    private String socialNetworkId;
+    @JsonProperty("messengerId")
+    private String messengerId;
 
-    @JsonProperty("link")
-    private String link;
+    @JsonProperty("nickname")
+    private String nickname;
 
     public PersonMessengerData id(String id) {
         this.id = id;
@@ -64,46 +67,47 @@ public class PersonMessengerData {
         this.personId = personId;
     }
 
-    public PersonMessengerData socialNetworkId(String socialNetworkId) {
-        this.socialNetworkId = socialNetworkId;
+    public PersonMessengerData messengerId(String messengerId) {
+        this.messengerId = messengerId;
         return this;
     }
 
     /**
      * Universally unique and immutable identifier of the messenger.
      *
-     * @return socialNetworkId
+     * @return messengerId
      */
     @ApiModelProperty(example = "TELEGRAM", value = "Universally unique and immutable identifier of the messenger.")
 
-    @Size(max = 255)
-    public String getSocialNetworkId() {
-        return socialNetworkId;
+    @Pattern(regexp = "([A-Z0-9_]*)")
+    @Size(min = 2, max = 255)
+    public String getMessengerId() {
+        return messengerId;
     }
 
-    public void setSocialNetworkId(String socialNetworkId) {
-        this.socialNetworkId = socialNetworkId;
+    public void setMessengerId(String messengerId) {
+        this.messengerId = messengerId;
     }
 
-    public PersonMessengerData link(String link) {
-        this.link = link;
+    public PersonMessengerData nickname(String nickname) {
+        this.nickname = nickname;
         return this;
     }
 
     /**
      * Link to the person's profile in messenger
      *
-     * @return link
+     * @return nickname
      */
     @ApiModelProperty(example = "@VasilyPupkin", value = "Link to the person's profile in messenger")
 
     @Size(max = 255)
-    public String getLink() {
-        return link;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
 
@@ -118,13 +122,13 @@ public class PersonMessengerData {
         PersonMessengerData personMessengerData = (PersonMessengerData) o;
         return Objects.equals(this.id, personMessengerData.id) &&
                 Objects.equals(this.personId, personMessengerData.personId) &&
-                Objects.equals(this.socialNetworkId, personMessengerData.socialNetworkId) &&
-                Objects.equals(this.link, personMessengerData.link);
+                Objects.equals(this.messengerId, personMessengerData.messengerId) &&
+                Objects.equals(this.nickname, personMessengerData.nickname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, personId, socialNetworkId, link);
+        return Objects.hash(id, personId, messengerId, nickname);
     }
 
     @Override
@@ -134,8 +138,8 @@ public class PersonMessengerData {
 
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    personId: ").append(toIndentedString(personId)).append("\n");
-        sb.append("    socialNetworkId: ").append(toIndentedString(socialNetworkId)).append("\n");
-        sb.append("    link: ").append(toIndentedString(link)).append("\n");
+        sb.append("    messengerId: ").append(toIndentedString(messengerId)).append("\n");
+        sb.append("    nickname: ").append(toIndentedString(nickname)).append("\n");
         sb.append("}");
         return sb.toString();
     }

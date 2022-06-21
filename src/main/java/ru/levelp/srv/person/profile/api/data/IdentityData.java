@@ -9,6 +9,9 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Represents a person&#39;s personal data
+ */
 @ApiModel(description = "Represents a person's personal data")
 public class IdentityData {
     @JsonProperty("firstName")
