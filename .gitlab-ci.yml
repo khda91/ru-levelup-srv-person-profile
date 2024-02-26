@@ -1,0 +1,50 @@
+image: gradle:jdk11
+
+stages:
+  - build
+  - test
+  - docker
+  - deploy
+
+build_jar:
+  stage: build
+  script:
+    - gradle assemble
+  artifacts:
+    when: on_success
+    expire_in: 2 days
+    paths:
+      - build/libs/*.jar
+
+unit_tests:
+  stage: test
+  script:
+    - gradle test
+
+integration_tests:
+  stage: test
+  script:
+    - echo "running integration test"
+
+image_version:
+  stage: docker
+  script:
+    - echo "generate docker image tag"
+    - echo "IMAGE_VERSION=1.0.0" >> build.env
+  artifacts:
+    reports:
+      dotenv: build.env
+
+build_image:
+  stage: docker
+  script:
+    - echo "docker build . --name $IMAGE_NAME:$IMAGE_TAG"
+  needs:
+    - build_jar
+    - image_version
+
+deploy_to_test:
+  stage: deploy
+  script:
+    - echo "deploy to test"
+
